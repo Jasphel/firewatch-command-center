@@ -51,7 +51,7 @@ function Histo({
       <PanelHeader title={title} desc={desc} />
       <div className="mt-3 h-36">
         <ResponsiveContainer>
-          <BarChart data={data} margin={{ left: -16, right: 4, top: 4 }}>
+          <BarChart data={data} margin={{ left: -4, right: 4, top: 4 }}>
             <CartesianGrid vertical={false} stroke="var(--border)" strokeDasharray="3 3" />
             <XAxis
               dataKey="label"

@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## FIREWATCH architecture
+
+- Harmonization, anomaly, forecast and narrative logic live as pure functions in `src/lib/firewatch/` (harmonize.ts, analysis.ts) so every UI number is computed, never hard-coded, and rules stay unit-testable.
+- Preview data comes only from the seeded generator in `src/lib/firewatch/sample-data.ts` and must stay labelled "sample" in the UI; replace it with the FIRMS → SQLite pipeline output rather than mixing sources.
+- The Leaflet map is loaded client-side via lazy import and always renders on the dark map surface (Esri Dark Gray tiles; CARTO now needs a key), with overlays wrapped in `.dark` so they stay legible in light theme.
+- UI strings that switch language go through `useT()` from `src/lib/firewatch/i18n.tsx`; add new keys to both EN and ID dictionaries.

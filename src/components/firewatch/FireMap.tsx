@@ -235,6 +235,17 @@ export function FireMap({
     }
   }, [ready, observations, view, showPoints, showDensity, selectedId, zoom]);
 
+  // Bring a selection made elsewhere (e.g. the candidate table) into view.
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!ready || !map || !selectedId) return;
+    const o = observations.find((x) => x.id === selectedId);
+    if (o && !map.getBounds().pad(-0.1).contains([o.lat, o.lon])) {
+      map.flyTo([o.lat, o.lon], Math.max(map.getZoom(), 7), { duration: 0.8 });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ready, selectedId]);
+
   return (
     <div
       ref={el}
